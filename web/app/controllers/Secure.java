@@ -19,7 +19,9 @@ public class Secure extends Controller {
 
     public static void authenticate(String username, String password){
         User u = User.loadUser(username);
-        if (u != null && u.getPassword().equals(HashUtils.getMd5(password))){
+        // se controla que el usuario y la contraseña no vayan vacíos
+        //if (u != null && u.getPassword().equals(HashUtils.getMd5(password))){
+        if (!username.isEmpty() && !password.isEmpty() && u != null && u.getPassword().equals(HashUtils.getMd5(password))){
             session.put("username", username);
             session.put("password", password);
             Application.index();
